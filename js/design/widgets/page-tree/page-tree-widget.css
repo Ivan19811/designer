@@ -1,0 +1,97 @@
+/* js/design/widgets/page-tree/page-tree-widget.css */
+/* Локальні стилі для віджета "Дерево сторінки" в панелі "Дизайн" */
+
+.design-section--page-tree .design-section__body {
+  padding-top: 8px;
+}
+
+.design-help-text {
+  font-size: 11px;
+  color: #9caad8;
+  margin: 0;
+}
+
+.design-page-tree__controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 6px;
+}
+
+.design-page-tree__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 255, 0.55);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 11px;
+  line-height: 1.3;
+  color: #e5edff;
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.08s ease;
+}
+
+.design-page-tree__toggle-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+.design-page-tree__toggle:hover {
+  background: rgba(30, 64, 175, 0.9);
+  border-color: rgba(129, 140, 248, 0.9);
+  transform: translateY(-0.5px);
+}
+
+#page-tree-wrap {
+  margin-top: 8px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(30, 64, 175, 0.7);
+}
+
+/* Базова типографіка дерева */
+#page-tree-root {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Вузли дерева (контейнери для рядків/блоків) — самі класи навішує JS */
+#page-tree-root .page-tree-row,
+#page-tree-root .page-tree-block {
+  padding: 2px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Відступи між рівнями дерева */
+#page-tree-root ul {
+  list-style: none;
+  margin: 4px 0 0 10px;
+  padding: 0;
+}
+
+/* Активні елементи дерева (виділені секції / блоки) */
+#page-tree-root .page-tree-row--active,
+#page-tree-root .page-tree-block--active {
+  background: rgba(56, 189, 248, 0.18); /* світла бірюзова підсвітка */
+  border: 1px solid rgba(56, 189, 248, 0.9);
+  color: #e5edff;
+  font-weight: 600;
+}
+
+/* Щоб при наведенні активний елемент не "губився" */
+#page-tree-root .page-tree-row--active:hover,
+#page-tree-root .page-tree-block--active:hover {
+  background: rgba(56, 189, 248, 0.32);
+}

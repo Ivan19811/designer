@@ -1,0 +1,657 @@
+/* БАЗА ВІДЖЕТА -------------------------------------------------- */
+
+.pm-body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 0 0, #020617, #020617 40%, #000 100%);
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.pm-root {
+  display: flex;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  padding: 24px 16px 32px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/* ШЕЛЛ ДЛЯ ГОЛОВНОГО БЛОКА + САЙТБАРА ------------------------- */
+
+.pm-shell {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+/* ГОЛОВНИЙ КОНТЕНТ ВІДЖЕТА ------------------------------------- */
+
+.pm-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ПАНЕЛЬ -------------------------------------------------------- */
+
+.pm-panel {
+  width: 100%;
+  max-width: 880px;
+  border-radius: 22px;
+  padding: 22px 22px 26px;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  box-sizing: border-box;
+}
+
+/* ШАПКА ПАНЕЛІ -------------------------------------------------- */
+
+.pm-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 16px 16px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.2), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  margin-bottom: 18px;
+}
+
+.pm-panel__title-block {
+  max-width: 60%;
+}
+
+.pm-panel__eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin: 0 0 4px;
+}
+
+.pm-panel__title {
+  font-size: 1.35rem;
+  font-weight: 650;
+  color: #f9fafb;
+  margin: 0 0 4px;
+}
+
+.pm-panel__subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #9ca3af;
+}
+
+.pm-panel__site-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 220px;
+}
+
+.pm-panel__site-label-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.pm-panel__site-label {
+  color: #9ca3af;
+}
+
+.pm-panel__site-name {
+  font-weight: 600;
+  color: #e5e7eb;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+/* КНОПКИ -------------------------------------------------------- */
+
+.pm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease,
+    border-color 0.12s ease, opacity 0.12s ease;
+  white-space: nowrap;
+}
+
+.pm-btn--primary {
+  background: linear-gradient(135deg, #4f46e5, #22c55e);
+  color: #f9fafb;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.8);
+}
+
+.pm-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.95);
+  opacity: 0.98;
+}
+
+.pm-btn--ghost {
+  width: 100%;
+  justify-content: center;
+  border-color: rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+}
+
+.pm-btn--ghost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+}
+
+/* ТІЛО ПАНЕЛІ --------------------------------------------------- */
+
+.pm-panel__body {
+  margin-top: 6px;
+}
+
+/* Порожній стан ------------------------------------------------- */
+
+.pm-empty {
+  padding: 24px 20px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  text-align: left;
+}
+
+.pm-empty__title {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.pm-empty__text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #9ca3af;
+}
+
+/* СПИСОК СТОРІНОК ----------------------------------------------- */
+
+.pm-pages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* КАРТКА СТОРІНКИ ----------------------------------------------- */
+
+.pm-page-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(55, 65, 81, 0.85);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: default;
+}
+
+.pm-page-card--active {
+  border-color: rgba(96, 165, 250, 0.95);
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
+}
+
+.pm-page-card--dragging {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.pm-page-card--drag-over {
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.85),
+    0 0 0 6px rgba(37, 99, 235, 0.3);
+}
+
+/* Верхня частина картки ---------------------------------------- */
+
+.pm-page-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pm-page-card__title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.pm-page-card__badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(31, 41, 55, 0.9);
+  border: 1px solid rgba(75, 85, 99, 0.9);
+  color: #a5b4fc;
+}
+
+.pm-page-card__title-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pm-page-card__title-text {
+  font-size: 0.98rem;
+  font-weight: 560;
+  color: #e5e7eb;
+}
+
+.pm-page-card__slug {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(55, 65, 81, 0.85);
+  color: #9ca3af;
+}
+
+/* Дії справа ---------------------------------------------------- */
+
+.pm-page-card__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Кнопки-іконки ------------------------------------------------- */
+
+.pm-icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(75, 85, 99, 0.9);
+  background: rgba(17, 24, 39, 0.96);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease,
+    border-color 0.12s ease, opacity 0.12s ease;
+}
+
+.pm-icon-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+.pm-icon-btn--primary {
+  background: radial-gradient(circle at 0 0, #4f46e5, #22c55e);
+  border-color: rgba(129, 140, 248, 0.9);
+}
+
+.pm-icon-btn--drag {
+  cursor: grab;
+}
+
+/* Кнопка "Додаткові налаштування" ------------------------------- */
+
+.pm-page-card__more-toggle {
+  margin: 0;
+  margin-top: 4px;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px dashed rgba(75, 85, 99, 0.9);
+  background: rgba(17, 24, 39, 0.95);
+  color: #9ca3af;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pm-page-card__more-toggle span {
+  font-size: 0.7rem;
+}
+
+/* БЛОК ДОДАТКОВИХ НАЛАШТУВАНЬ ---------------------------------- */
+
+.pm-page-card__details {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(55, 65, 81, 0.9);
+  display: none;
+}
+
+.pm-page-card__details.is-open {
+  display: block;
+}
+
+/* Сітка полів --------------------------------------------------- */
+
+.pm-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+}
+
+.pm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pm-field__label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+.pm-field__description {
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+/* Інпути -------------------------------------------------------- */
+
+.pm-input,
+.pm-select {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid rgba(55, 65, 81, 0.95);
+  background: rgba(17, 24, 39, 0.96);
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  padding: 6px 8px;
+}
+
+.pm-input:focus,
+.pm-select:focus {
+  outline: none;
+  border-color: rgba(96, 165, 250, 0.95);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.7);
+}
+
+/* Перемикачі ---------------------------------------------------- */
+
+.pm-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.pm-switch input[type="checkbox"] {
+  margin-top: 2px;
+}
+
+.pm-switch__label {
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.pm-switch__hint {
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+/* Одноколонковий рядок (для перемикачів) ----------------------- */
+
+.pm-page-grid--full {
+  grid-column: 1 / -1;
+}
+
+/* ДОДАТКОВИЙ САЙТБАР ------------------------------------------- */
+
+.pm-side {
+  width: 280px;
+  min-width: 260px;
+  max-height: calc(100vh - 40px);
+  padding: 18px 14px 18px;
+  border-radius: 20px;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden; /* у standalone-режимі скрол всередині */
+}
+
+/* Основний список секцій у сайтбарі */
+.pm-side__sections {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
+  padding-right: 4px;
+  margin-right: -4px;
+}
+
+/* Шапка сайтбара */
+.pm-side__header {
+  padding: 4px 4px 8px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.28), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(59, 130, 246, 0.6);
+}
+
+.pm-side__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pm-side__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.pm-side__title {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.pm-side__hint {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* Секції в сайтбарі (як картки-акордеони) */
+.pm-side__section {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.75);
+  margin-top: 10px;
+}
+
+.pm-side__section:first-of-type {
+  margin-top: 4px;
+}
+
+/* Шапка секції */
+.pm-side__section-header {
+  width: 100%;
+  padding: 8px 10px 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.26), rgba(15, 23, 42, 0.98));
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pm-side__section-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pm-side__section-title {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.pm-side__section-subtitle {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #9ca3af;
+}
+
+.pm-side__chevron {
+  font-size: 0.7rem;
+  opacity: 0.85;
+  transform: translateY(2px);
+  transition: transform 0.14s ease;
+}
+
+.pm-side__section.is-open .pm-side__chevron {
+  transform: translateY(2px) rotate(90deg);
+}
+
+/* Тіло секції */
+.pm-side__section-body {
+  display: none;
+  padding: 8px 10px 10px;
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.pm-side__section.is-open .pm-side__section-body {
+  display: block;
+}
+
+/* Внутрішні групи у тілі секції */
+.pm-side__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pm-side__group--stack {
+  margin-top: 4px;
+}
+
+/* === ВБУДОВАНИЙ РЕЖИМ В ІНСПЕКТОРІ (ShiftTime Builder) ======== */
+/* Тут віджет "Сторінки" живе в додатковому сайтбарі (Інспекторі) */
+
+.pm-side--embedded {
+  width: 100%;
+  max-height: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  border: 0;
+  padding: 6px 0 8px;  /* менший відступ зверху */
+  overflow: visible;   /* віддаємо скрол наверх (builder__settings-panels) */
+  margin-top: 0;
+}
+
+/* У вкладці "Сторінки" скролиться весь Інспектор, а не внутрішній список */
+.builder__settings-panel[data-panel-id="pages"] .pm-side__sections {
+  flex: 0 0 auto;
+  overflow: visible;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+/* Шапка "Віджет «Сторінки»" прилипає до верху Інспектора */
+.builder__settings-panel[data-panel-id="pages"] .pm-side__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin-bottom: 6px;
+}
+
+/* Підтягуємо перший блок ближче до шапки Інспектора */
+.builder__settings-panel[data-panel-id="pages"] .pm-side {
+  margin-top: 0;
+}
+
+/* АДАПТИВ ------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .pm-shell {
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pm-shell {
+    flex-direction: column-reverse;
+  }
+
+  .pm-side {
+    width: 100%;
+    max-height: 260px;
+    order: 2;
+  }
+
+  .pm-main {
+    order: 1;
+  }
+
+  .pm-panel__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pm-panel__title-block {
+    max-width: 100%;
+  }
+
+  .pm-panel__site-block {
+    align-items: flex-start;
+  }
+
+  .pm-page-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

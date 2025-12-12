@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShiftTime — Конструктор сайтів (Каркас v1)</title>
+
+
+      <!-- Динамічні стилі для скролбарів -->
+  <style id="dyn-scrollbars"></style>
+  <link rel="stylesheet" href="css/builder-themes.css" />
+  <link rel="stylesheet" href="css/builder-shell.css"  />
+  <link rel="stylesheet" href="css/site-canvas.css"    />
+  <link rel="stylesheet" href="css/builder-widget.css" />
+  <link rel="stylesheet" href="css/design-panel.css"> <!-- ⬅ ДОДАТИ -->
+  <link rel="stylesheet" href="js/design/widgets/page-tree/page-tree-widget.css">
+  <link rel="stylesheet" href="js/design/widgets/page-background/css/design-panel.css">
+  <link rel="stylesheet" href="js/design/widgets/fill/css/design-fill.css">                     
+  <link rel="stylesheet" href="js/design/widgets/border-widget/css/border-widget.css">
+  <link rel="stylesheet" href="css/gallery-widget.css">
+
+
+  <!-- Стилі віджета "Сайт" -->
+  <link rel="stylesheet" href="widgets/site-manager/css/site-manager.css" />
+   <!-- Стилі віджета "Сторінки" -->
+  <link rel="stylesheet" href="widgets/page-manager/css/page-manager.css" />
+
+
+</head>
+<body>
+
+  <div id="builder-root"
+       class="builder builder--theme-light builder--side-left builder--header-visible builder--sidebar-expanded">
+
+    <!-- ============= HEADER ============= -->
+    <header class="builder__header">
+      <div class="builder__header-left">
+        <div class="builder__logo">
+          <span class="builder__logo-mark">S</span>
+          <span class="builder__logo-text">ShiftTime Builder</span>
+        </div>
+      </div>
+
+      <div class="builder__header-center">
+
+       <!-- Поточний сайт -->
+        <div id="builder-site-title" class="builder-site-title" hidden>
+          <span class="builder-site-title__label">Сайт:</span>
+          <span class="builder-site-title__name">—</span>
+        </div>
+
+
+
+
+        <!-- Тема -->
+        <label class="builder__header-field">
+          Тема:
+          <select id="builder-theme-select">
+            <option value="light">Світла</option>
+            <option value="dark">Темна</option>
+            <option value="custom">Користувацька</option>
+          </select>
+        </label>
+
+        <!-- Вигляд конструктора -->
+        <label class="builder__header-field">
+          Вигляд:
+          <select id="builder-view-select">
+            <option value="rounded">Сучасний</option>
+            <option value="table">Табличний</option>
+          </select>
+        </label>
+
+        <!-- Preview -->
+        <button id="builder-preview-btn" class="builder__header-btn">
+          Попередній перегляд
+        </button>
+
+        <!-- Publish -->
+        <button id="builder-publish-btn" class="builder__header-btn" disabled>
+          Публікація
+        </button>
+      </div>
+
+      <div class="builder__header-right">
+        <!-- Збережені теми конструктора -->
+        <label class="builder__header-field">
+          Мої теми:
+          <select id="builder-saved-themes">
+            <option value="">—</option>
+          </select>
+        </label>
+
+        <!-- Налаштування конструктора -->
+        <button class="builder__header-btn" data-open-panel="constructor">
+          ⚙ Налаштування конструктора
+        </button>
+
+        <!-- Показати/сховати шапку -->
+        <button class="builder__header-btn" data-action="toggle-main-header">
+          Приховати шапку
+        </button>
+      </div>
+    </header>
+
+    <div class="builder__main">
+
+      <!-- ГОЛОВНИЙ САЙТБАР -->
+     <aside id="builder-main-sidebar" class="builder__sidebar">
+  <div class="builder__sidebar-inner">
+    <button
+      class="builder__sidebar-collapse"
+      data-action="toggle-sidebar-collapse"
+      title="Згорнути / розгорнути"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <nav class="builder__sidebar-menu">
+      <!-- Сайт -->
+      <button
+        class="builder__sidebar-item"
+        data-open-panel="site"
+        id="navSite"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">🌐</span>
+        <span class="builder__sidebar-label">Сайт</span>
+      </button>
+
+      <!-- Сторінки -->
+      <button
+        class="builder__sidebar-item"
+        data-open-panel="pages"
+        id="navPages"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">📄</span>
+        <span class="builder__sidebar-label">Сторінки</span>
+      </button>
+
+      <!-- Дизайн -->
+      <button
+        class="builder__sidebar-item"
+        data-open-panel="design"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">🎨</span>
+        <span class="builder__sidebar-label">Дизайн</span>
+      </button>
+
+      <!-- Фон сайту -->
+      <button
+        class="builder__sidebar-item is-active"
+        data-open-panel="background"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">🖼</span>
+        <span class="builder__sidebar-label">Фон сайту</span>
+      </button>
+
+      <!-- Блоки -->
+      <button
+        class="builder__sidebar-item"
+        data-open-panel="blocks"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">🧱</span>
+        <span class="builder__sidebar-label">Блоки</span>
+      </button>
+
+      <!-- Глобальні -->
+      <button
+        class="builder__sidebar-item"
+        data-open-panel="global"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">⚙</span>
+        <span class="builder__sidebar-label">Налаштування</span>
+      </button>
+    </nav>
+
+    <!-- 🚀 Кнопка Ліво / Право -->
+    <div class="builder__sidebar-footer">
+      <button
+        class="builder__sidebar-item"
+        data-action="toggle-side"
+        type="button"
+      >
+        <span class="builder__sidebar-icon">⇆</span>
+        <span class="builder__sidebar-label">Ліво / Право</span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+
+      <!-- ДОДАТКОВИЙ САЙТБАР -->
+      <aside id="builder-settings-sidebar" class="builder__settings">
+        <header class="builder__settings-header">
+          <div class="builder__settings-title">Налаштування</div>
+          <button class="builder__settings-close" data-action="close-settings" title="Закрити">✕</button>
+        </header>
+
+        <div class="design-mode-tabs" data-design-mode-bar>
+          <button class="design-pill is-active" data-design-mode="none">
+            Нічого
+          </button>
+          <button class="design-pill" data-design-mode="blocks">
+            Блоки
+          </button>
+          <button class="design-pill" data-design-mode="sections">
+            Секції
+          </button>
+        </div>
+
+        <div class="builder__settings-panels">
+          <!-- ФОН САЙТУ -->
+         <!-- ФОН САЙТУ + НАЛАШТУВАННЯ СКРОЛБАРІВ -->
+<section class="builder__settings-panel is-active" data-panel-id="background" id="settings-panel-root">
+
+  <h2 class="builder__panel-title">Фон сайту &amp; прокрутка</h2>
+
+  <!-- (Тут можеш додати свої налаштування фону: колір, картинка, градієнт і т.д.) -->
+
+  <!-- ================= ГОЛОВНИЙ БЛОК (canvas__scroll) ================= -->
+  <div class="builder__field-group" data-scrollbars-group="main">
+    <span class="builder__field-group-label">Прокрутка робочого полотна</span>
+
+    <!-- Режим відображення -->
+    <label class="builder__field">
+      <span class="builder__field-label">Режим відображення</span>
+      <select name="mode">
+        <option value="always">Показувати завжди</option>
+        <option value="hover">Показувати при наведенні</option>
+        <option value="hidden">Приховати</option>
+      </select>
+    </label>
+
+    <!-- Ширина повзунка -->
+    <label class="builder__field">
+      <span class="builder__field-label">Ширина повзунка, px (0–48)</span>
+      <input type="range" name="width" min="0" max="48" value="8" />
+    </label>
+
+    <!-- Радіус повзунка -->
+    <label class="builder__field">
+      <span class="builder__field-label">Радіус повзунка, px (0–999)</span>
+      <input type="range" name="radius" min="0" max="999" value="999" />
+    </label>
+
+    <!-- Кольори -->
+    <div class="builder__field builder__field--inline">
+      <label>
+        <span class="builder__field-label">Колір фону треку</span>
+        <input type="color" name="trackColor" value="#020617" />
+      </label>
+      <label>
+        <span class="builder__field-label">Колір повзунка</span>
+        <input type="color" name="thumbColor" value="#38bdf8" />
+      </label>
+      <label>
+        <span class="builder__field-label">Ховер-колір повзунка</span>
+        <input type="color" name="thumbHoverColor" value="#7ed4fa" />
+      </label>
+    </div>
+  </div>
+
+  <!-- ============== ПРАВИЙ САЙТБАР (builder__settings-panels) ============== -->
+  <div class="builder__field-group" data-scrollbars-group="side">
+    <span class="builder__field-group-label">Правий сайтбар з налаштуваннями</span>
+
+    <!-- Режим відображення -->
+    <label class="builder__field">
+      <span class="builder__field-label">Режим відображення</span>
+      <select name="mode">
+        <option value="always">Показувати завжди</option>
+        <option value="hover">Показувати при наведенні</option>
+        <option value="hidden">Приховати</option>
+      </select>
+    </label>
+
+    <!-- Ширина повзунка -->
+    <label class="builder__field">
+      <span class="builder__field-label">Ширина повзунка, px (0–48)</span>
+      <input type="range" name="width" min="0" max="48" value="8" />
+    </label>
+
+    <!-- Радіус повзунка -->
+    <label class="builder__field">
+      <span class="builder__field-label">Радіус повзунка, px (0–999)</span>
+      <input type="range" name="radius" min="0" max="999" value="999" />
+    </label>
+
+    <!-- Кольори -->
+    <div class="builder__field builder__field--inline">
+      <label>
+        <span class="builder__field-label">Колір фону треку</span>
+        <input type="color" name="trackColor" value="#020617" />
+      </label>
+      <label>
+        <span class="builder__field-label">Колір повзунка</span>
+        <input type="color" name="thumbColor" value="#38bdf8" />
+      </label>
+      <label>
+        <span class="builder__field-label">Ховер-колір повзунка</span>
+        <input type="color" name="thumbHoverColor" value="#7ed4fa" />
+      </label>
+    </div>
+  </div>
+
+</section>
+
+
+          <!-- ДИЗАЙН -->
+          <section class="builder__settings-panel" data-panel-id="design" id="design-panel-root">
+            <h2 class="builder__panel-title">Дизайн</h2>
+            <div class="design-panel" id="design-panel">
+              <!-- Сюди JS вставить блоки налаштувань (Розмітка, Заливка, Кути тощо) -->
+            </div>
+          </section>
+
+          <!-- БЛОКИ / ІНСПЕКТОР -->
+          <!-- БЛОКИ / ІНСПЕКТОР -->
+      <section class="builder__settings-panel" data-panel-id="blocks" id="blocks-panel-root">
+        <h2 class="builder__panel-title">Блоки</h2>
+        <p class="builder__panel-note">
+          Тут буде інспектор блоків, а також дерево поточної сторінки для швидкої навігації.
+        </p>
+
+        <!-- Група керування режимом -->
+        <div class="builder__field-group">
+          <span class="builder__field-group-label">Режим перегляду</span>
+
+          <div class="design-pill-group">
+            <!-- Поки що це просто заглушка під майбутній інспектор -->
+            <button
+              type="button"
+              class="design-pill is-active"
+              id="blocks-mode-inspector"
+              disabled
+            >
+              Інспектор (скоро)
+            </button>
+
+            <!-- Реальна кнопка для дерева сторінки -->
+            <button
+              type="button"
+              class="design-pill"
+              id="toggle-page-tree"
+            >
+              Дерево сторінки 2
+            </button>
+          </div>
+
+          <p class="builder__panel-note" style="margin-top: 6px;">
+            Клік по елементу в дереві виділяє його на полотні. Затисни <b>Ctrl</b>, щоб обирати кілька
+            секцій або блоків.
+          </p>
+        </div>
+
+        <!-- Область для самого дерева сторінки -->
+        <div class="builder__field-group" id="page-tree-wrap">
+          <span class="builder__field-group-label">Структура сторінки</span>
+          <div id="page-tree-root"></div>
+        </div>
+      </section>
+
+          <!-- САЙТ: кнопки віджета "Сайт" -->
+          <section class="builder__settings-panel" data-panel-id="site" id="site-panel-root">
+            <div class="sm-sidebar__header">
+              <div class="sm-sidebar__badge">ВІДЖЕТ</div>
+              <h1 class="sm-sidebar__title">Сайт</h1>
+              <p class="sm-sidebar__subtitle">
+                Керування сайтами: створення, вибір і збереження даних для публікації на Netlify.
+              </p>
+            </div>
+
+            <div class="sm-sidebar__section">
+              <button class="sm-btn sm-btn--primary" id="smCreateBtn" type="button">
+                + Створити сайт
+              </button>
+              <button class="sm-btn sm-btn--ghost" id="smOpenBtn" type="button">
+                Відкрити сайт
+              </button>
+            </div>
+
+            <div class="sm-sidebar__section">
+              <div class="sm-sidebar__section-title">Список сайтів</div>
+              <ul class="sm-site-list" id="smSiteList">
+                <!-- JS намалює елементи тут -->
+              </ul>
+            </div>
+          </section>
+
+          <!-- ЗАГАЛЬНІ -->
+          <section class="builder__settings-panel" data-panel-id="global">
+            ...
+          </section>
+
+          <!-- КОНСТРУКТОР -->
+          <section class="builder__settings-panel" data-panel-id="constructor" id="constructor-panel-root">
+            ...
+          </section>
+        
+
+
+
+
+                  <!-- СТОРІНКИ: налаштування віджета "Сторінки" -->
+          <section class="builder__settings-panel" data-panel-id="pages" id="pages-panel-root">
+            <div class="pm-side pm-side--embedded" id="pmSidePanel">
+              <!-- Шапка сайтбару -->
+              <header class="pm-side__header">
+                <div class="pm-side__title-wrap">
+                  <p class="pm-side__eyebrow">Налаштування</p>
+                  <h2 class="pm-side__title">Віджет «Сторінки»</h2>
+                </div>
+                <p class="pm-side__hint">
+                  Глобальні налаштування відображення сторінок. Цей блок потім
+                  перенесемо в основний додатковий сайтбар конструктора.
+                </p>
+              </header>
+
+              <div class="pm-side__sections">
+                <!-- СЕКЦІЯ: Режим перегляду -->
+                <section class="pm-side__section">
+                  <h3 class="pm-side__section-title">Режим перегляду</h3>
+                  <p class="pm-side__section-subtitle">
+                    Обери, які сторінки показувати та як їх сортувати.
+                  </p>
+
+                  <div class="pm-side__group">
+                    <div class="pm-field">
+                      <div class="pm-field__label">Фільтр статусу</div>
+                      <div class="pm-pill-group" data-role="pmFilterStatus">
+                        <button type="button" class="pm-pill pm-pill--active" data-filter="all">
+                          Усі
+                        </button>
+                        <button type="button" class="pm-pill" data-filter="published">
+                          Опубліковані
+                        </button>
+                        <button type="button" class="pm-pill" data-filter="draft">
+                          Чернетки
+                        </button>
+                        <button type="button" class="pm-pill" data-filter="private">
+                          Тільки за посиланням
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="pm-field">
+                      <div class="pm-field__label">Сортування</div>
+                      <select class="pm-select" id="pmSortSelect">
+                        <option value="order">За порядком у списку</option>
+                        <option value="name">За назвою (A–Я)</option>
+                        <option value="status">За статусом</option>
+                        <option value="path">За URL (slug)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="pm-side__switch-row">
+                    <label class="pm-switch">
+                      <input type="checkbox" id="pmShowSlugSwitch" checked />
+                      <div>
+                        <div class="pm-switch__label">Показувати URL (slug)</div>
+                        <div class="pm-switch__hint">
+                          Якщо вимкнути — у списку сторінок буде тільки назва без шляху.
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="pm-side__switch-row">
+                    <label class="pm-switch">
+                      <input type="checkbox" id="pmHighlightHomeSwitch" checked />
+                      <div>
+                        <div class="pm-switch__label">Виділяти домашню сторінку</div>
+                        <div class="pm-switch__hint">
+                          Підсвічувати сторінку, яка позначена як «Домашня».
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </section>
+
+                <!-- ==========================СЕКЦІЯ: Стандартні блоки сторінки================================ -->
+                <section class="pm-side__section">
+                  <h3 class="pm-side__section-title">Стандартні блоки сторінки</h3>
+                  <p class="pm-side__section-subtitle">
+                    За замовчуванням для нових сторінок. Їх можна перевизначити у самій сторінці.
+                  </p>
+
+                  <div class="pm-side__group pm-side__group--stack">
+                    <div class="pm-field">
+                      <div class="pm-field__label">Шапка (Header)</div>
+                      <select class="pm-select" id="pmDefaultHeader">
+                        <option value="default">Стандартна шапка сайту</option>
+                        <option value="custom">Власна для сторінки</option>
+                        <option value="none">Без шапки за замовчуванням</option>
+                      </select>
+                    </div>
+
+                    <div class="pm-field">
+                      <div class="pm-field__label">Футер (Footer)</div>
+                      <select class="pm-select" id="pmDefaultFooter">
+                        <option value="default">Стандартний футер сайту</option>
+                        <option value="custom">Власний для сторінки</option>
+                        <option value="none">Без футера за замовчуванням</option>
+                      </select>
+                    </div>
+
+                    <div class="pm-field">
+                      <div class="pm-field__label">Сайдбар</div>
+                      <select class="pm-select" id="pmDefaultSidebar">
+                        <option value="default">Стандартний сайдбар</option>
+                        <option value="custom">Окремий для сторінки</option>
+                        <option value="none">Без сайдбара</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="pm-side__switch-row">
+                    <label class="pm-switch">
+                      <input type="checkbox" id="pmInheritLayoutSwitch" checked />
+                      <div>
+                        <div class="pm-switch__label">Наслідувати макет від сайту</div>
+                        <div class="pm-switch__hint">
+                          Нові сторінки використовують базові відступи/сітку теми сайту.
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </section>
+
+                <!-- СЕКЦІЯ: Шаблони сторінок -->
+                <section class="pm-side__section">
+                  <h3 class="pm-side__section-title">Шаблони сторінок</h3>
+                  <p class="pm-side__section-subtitle">
+                    Швидкий старт: створити нову сторінку на основі готової структури.
+                  </p>
+
+                  <div class="pm-pill-group pm-pill-group--wrap">
+                    <button type="button" class="pm-pill" data-template="landing">
+                      Лендінг
+                    </button>
+                    <button type="button" class="pm-pill" data-template="services">
+                      Послуги
+                    </button>
+                    <button type="button" class="pm-pill" data-template="contacts">
+                      Контакти
+                    </button>
+                    <button type="button" class="pm-pill" data-template="blog">
+                      Блог / Статті
+                    </button>
+                    <button type="button" class="pm-pill" data-template="blank">
+                      Порожня сторінка
+                    </button>
+                  </div>
+
+                  <button type="button" class="pm-btn pm-btn--ghost" id="pmTemplateCreateBtn">
+                    Створити сторінку з шаблону
+                  </button>
+                </section>
+
+                <!-- СЕКЦІЯ: Публікація & SEO -->
+                <section class="pm-side__section">
+                  <h3 class="pm-side__section-title">Публікація &amp; SEO</h3>
+                  <p class="pm-side__section-subtitle">
+                    Базові налаштування для публікації усіх сторінок сайту.
+                  </p>
+
+                  <div class="pm-side__group pm-side__group--stack">
+                    <div class="pm-field">
+                      <div class="pm-field__label">Базовий домен сайту</div>
+                      <div class="pm-field__description">
+                        Використовується для формування повних URL (Netlify / кастомний домен).
+                      </div>
+                      <input
+                        class="pm-input"
+                        type="text"
+                        id="pmBaseDomain"
+                        placeholder="https://my-site.netlify.app"
+                      />
+                    </div>
+
+                    <div class="pm-field">
+                      <div class="pm-field__label">Префікс для сторінок</div>
+                      <div class="pm-field__description">
+                        Наприклад: <code>/app</code>, <code>/store</code> або порожньо.
+                      </div>
+                      <input class="pm-input" type="text" id="pmBasePrefix" placeholder="/" />
+                    </div>
+                  </div>
+
+                  <div class="pm-side__switch-row">
+                    <label class="pm-switch">
+                      <input type="checkbox" id="pmAutoNoindexDrafts" checked />
+                      <div>
+                        <div class="pm-switch__label">Автоматично noindex для чернеток</div>
+                        <div class="pm-switch__hint">
+                          Усі сторінки зі статусом «Чернетка» будуть позначені як <code>noindex</code>.
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </section>
+</div>
+
+
+
+
+
+      </aside>
+
+      <!-- RESIZER -->
+      <div id="builder-settings-resizer" class="builder__settings-resizer"></div>
+
+      <!-- CANVAS -->
+      <section class="builder__canvas">
+        <header class="canvas__header">
+          <div class="canvas__title"></div>
+
+          <button id="add-section-btn" class="builder__header-btn" type="button">
+            + Додати секцію
+          </button>
+
+          <button id="add-block-btn" class="builder__header-btn" type="button">
+            + Додати блок
+          </button>
+
+          <!-- 🆕 НОВЕ: додати лінію -->
+          <button id="add-line-btn" class="builder__header-btn" type="button">
+            + Додати лінію
+          </button>
+
+
+        </header>
+
+        <div class="canvas__scroll canvas__scroll--full">
+          <!-- Вбудований віджет "Сайт" (головне вікно) -->
+          <div id="siteManagerView" hidden>
+            <div id="siteWidgetRoot" class="sm-root sm-root--embedded">
+              <main class="sm-main">
+                <div class="site-panel" id="sitePanel">
+                  <div class="site-panel__header">
+                    <div>
+                      <h2 class="site-panel__title">Налаштування сайту</h2>
+                      <p class="site-panel__subtitle">
+                        Заповни назву, slug та дані для Netlify. Ці параметри будуть використовуватись
+                        при публікації сайту.
+                      </p>
+                    </div>
+                    <button class="site-panel__save-btn" id="siteSaveBtn" type="button">
+                      Зберегти
+                    </button>
+                  </div>
+
+                  <div class="site-panel__body">
+                    <!-- Основна інформація -->
+                    <section class="site-card">
+                      <h3 class="site-card__title">Основна інформація</h3>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Назва сайту</span>
+                        <input
+                          type="text"
+                          id="siteName"
+                          class="site-field__input"
+                          placeholder="Наприклад, ShiftTime Store"
+                        />
+                      </label>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Slug / Код сайту</span>
+                        <input
+                          type="text"
+                          id="siteSlug"
+                          class="site-field__input"
+                          placeholder="shifttime-store"
+                        />
+                        <small class="site-field__hint">
+                          Лише латинські літери, цифри та дефіси. Використовується як код / папка сайту.
+                        </small>
+                      </label>
+
+                      <!-- Вибір шаблону сайту -->
+                      <div class="site-field">
+                        <span class="site-field__label">Шаблон сайту</span>
+                        <select
+                          id="siteTemplateSelect"
+                          class="site-field__input site-field__select"
+                        >
+                          <!-- JS заповнить -->
+                        </select>
+                        <small class="site-field__hint" id="siteTemplateInfo">
+                          Обери базовий шаблон (шапка, сайтбар, футер, основний блок). Пізніше
+                          конструктор сторінок буде будувати структуру сайту за цим шаблоном.
+                        </small>
+                      </div>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Короткий опис</span>
+                        <textarea
+                          id="siteDescription"
+                          class="site-field__textarea"
+                          rows="3"
+                          placeholder="Короткий опис сайту для SEO та списку сайтів"
+                        ></textarea>
+                      </label>
+                    </section>
+
+                    <!-- Netlify -->
+                    <section class="site-card">
+                      <h3 class="site-card__title">Публікація на Netlify</h3>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Netlify Site Name</span>
+                        <input
+                          type="text"
+                          id="netlifySiteName"
+                          class="site-field__input"
+                          placeholder="shifttime-store"
+                        />
+                      </label>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Netlify URL</span>
+                        <input
+                          type="text"
+                          id="netlifyUrl"
+                          class="site-field__input"
+                          placeholder="https://shifttime-store.netlify.app"
+                        />
+                      </label>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Папка публікації (publish directory)</span>
+                        <input
+                          type="text"
+                          id="netlifyPublishDir"
+                          class="site-field__input"
+                          placeholder="frontend"
+                        />
+                        <small class="site-field__hint">
+                          Яку папку ти завантажуєш на Netlify. Зараз це вміст папки <code>frontend</code>.
+                        </small>
+                      </label>
+
+                      <label class="site-field">
+                        <span class="site-field__label">Deploy Hook URL (на майбутнє)</span>
+                        <input
+                          type="text"
+                          id="netlifyDeployHook"
+                          class="site-field__input"
+                          placeholder="https://api.netlify.com/build_hooks/..."
+                        />
+                        <small class="site-field__hint">
+                          Можна залишити порожнім. Пізніше використаємо для автодеплою.
+                        </small>
+                      </label>
+                    </section>
+
+                    <!-- Службова інформація -->
+                    <section class="site-card">
+                      <h3 class="site-card__title">Службова інформація</h3>
+
+                      <div class="site-meta">
+                        <div class="site-meta__item">
+                          <span class="site-meta__label">ID сайту</span>
+                          <span class="site-meta__value" id="siteIdView">—</span>
+                        </div>
+                        <div class="site-meta__item">
+                          <span class="site-meta__label">Створено</span>
+                          <span class="site-meta__value" id="siteCreatedAtView">—</span>
+                        </div>
+                        <div class="site-meta__item">
+                          <span class="site-meta__label">Оновлено</span>
+                          <span class="site-meta__value" id="siteUpdatedAtView">—</span>
+                        </div>
+                      </div>
+                    </section>
+
+                    <!-- Сторінки сайту (MVP) -->
+                    <section class="site-card">
+                      <h3 class="site-card__title">Сторінки сайту (MVP)</h3>
+
+                      <p class="site-field__hint" style="margin-bottom: 8px;">
+                        Для кожного сайту можна мати кілька сторінок. Пізніше саме тут будемо
+                        відкривати сторінку в головному конструкторі.
+                      </p>
+
+                      <button
+                        class="sm-btn sm-btn--ghost site-pages__add-btn"
+                        id="siteAddPageBtn"
+                        type="button"
+                      >
+                        + Додати сторінку
+                      </button>
+
+                      <ul class="site-pages__list" id="sitePagesList">
+                        <!-- Список сторінок малює JS -->
+                      </ul>
+
+                      <!-- DEBUG-панель поточного вибору -->
+                      <div class="site-debug" id="siteDebug">
+                        <div class="site-debug__label">Поточний сайт / сторінка:</div>
+                        <div class="site-debug__value">—</div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </main>
+            </div>
+          </div>
+
+                    <!-- Вбудований віджет "Сторінки" (головне вікно) -->
+          <div id="pageManagerView" hidden>
+            <div id="pageWidgetRoot" class="pm-root pm-root--embedded">
+              <main class="pm-main">
+                <section class="pm-panel" id="pagePanel">
+                  <!-- ШАПКА ВІДЖЕТА "СТОРІНКИ" -->
+                  <header class="pm-panel__header">
+                    <div class="pm-panel__title-block">
+                      <p class="pm-panel__eyebrow">Віджет</p>
+                      <h1 class="pm-panel__title">Сторінки сайту</h1>
+                      <p class="pm-panel__subtitle">
+                        Керуй сторінками поточного сайту: назви, порядок, статус, дизайн.
+                      </p>
+                    </div>
+
+                    <div class="pm-panel__site-block">
+                      <div class="pm-panel__site-label-row">
+                        <span class="pm-panel__site-label">Сайт:</span>
+                        <span class="pm-panel__site-name" id="pmSiteName">—</span>
+                      </div>
+                      <button class="pm-btn pm-btn--primary" id="pmCreatePageBtn" type="button">
+                        + Створити сторінку
+                      </button>
+                    </div>
+                  </header>
+
+                  <!-- ТІЛО ВІДЖЕТА -->
+                  <div class="pm-panel__body">
+                    <!-- Порожній стан -->
+                    <div class="pm-empty" id="pmEmptyState" hidden>
+                      <h2 class="pm-empty__title">Немає сторінок</h2>
+                      <p class="pm-empty__text">
+                        Створи першу сторінку для вибраного сайту або імпортуй із шаблону.
+                      </p>
+                    </div>
+
+                    <!-- Список сторінок -->
+                    <div class="pm-pages-list" id="pmPageList">
+                      <!-- JS віджета "Сторінки" намалює картки -->
+                    </div>
+                  </div>
+                </section>
+              </main>
+            </div>
+          </div>
+
+
+
+          <!-- Звичайний режим конструктора (canvas) -->
+          <div id="canvasView">
+            <div id="site-canvas" class="builder__canvas-site">
+              <div id="site-root" class="site-root">
+                <!-- Стартова секція вже є в HTML / JS -->
+                <section class="st-section">
+                  <div class="st-row">
+                    <div class="st-block"></div>
+                    <div class="st-block"></div>
+                    <div class="st-block"></div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="builder__footer">
+      <div>ShiftTime Builder v1</div>
+      <div>© 2025</div>
+    </footer>
+
+  </div>
+
+  <!-- JS віджета "Сайт" (глобальний, НЕ module) -->
+  <script src="widgets/site-manager/js/site-templates.js"></script>
+  <script src="widgets/site-manager/js/site-manager.js"></script>
+
+  <!-- JS віджета "Сторінки" (глобальний, НЕ module) -->
+  <script src="widgets/page-manager/js/page-manager.js"></script>
+
+  <!-- Головна ініціалізація конструктора + інтеграція віджета "Сайт" -->
+  <script type="module" src="./js/builder-init.js"></script>
+  <!-- Простий перемикач центральних вікон "Сайт" / "Сторінки" / Canvas -->
+
+
+  <!-- Налаштування скролбарів (конструктор + додатковий сайтбар) -->
+  <script type="module" src="./js/settings/widgets/scrollbars-init.js"></script>
+
+
+
+</body>
+</html>

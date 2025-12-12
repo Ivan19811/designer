@@ -1,0 +1,101 @@
+/* ---- Віджет "Фон сторінки" ---- */
+
+.design-bg-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.design-bg-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.design-bg-row label {
+  font-size: 11px;
+  color: #cbd5f5;
+  min-width: 90px;
+}
+
+.design-bg-row input[type="color"] {
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: transparent;
+}
+
+.design-bg-row input[type="text"],
+.design-bg-row select,
+.design-bg-row input[type="number"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.design-bg-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.design-bg-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.85);
+  transition: border-color 0.16s ease-out, box-shadow 0.16s ease-out, background 0.16s ease-out;
+}
+
+.design-bg-mode input[type="radio"] {
+  margin: 0;
+}
+
+.design-bg-mode.is-active {
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+  background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.2), transparent 60%),
+              rgba(15, 23, 42, 0.95);
+}
+
+.design-bg-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.design-bg-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.design-bg-flag input[type="checkbox"] {
+  margin: 0;
+}
+
+.design-subnote {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #8b9ad8;
+}
+
+/* Тягнемо фон сторінки на всю висоту центрального поля конструктора */
+#site-canvas {
+  min-height: 100vh;  /* або підправимо потім, якщо захочеш іншу висоту */
+  box-sizing: border-box;
+}

@@ -1,0 +1,632 @@
+/* css/builder-shell.css */
+/* Каркас конструктора + повна ізоляція сайта від конструктора */
+/* ✅ Стиль під скрін (через st-токени) БЕЗ ламання старих clr-змінних */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Скрол тільки всередині конструктора, не в усього документа */
+}
+
+
+
+
+/* ✅ Ізолюємо reset тільки всередині конструктора */
+.builder,
+.builder *,
+.builder *::before,
+.builder *::after {
+  box-sizing: border-box;
+}
+
+/* Body залишаємо нейтральним, щоб не впливати на сайт */
+body {
+  margin: 0;
+  background: #020617;
+}
+
+.builder {
+  /* ====== ALIAS: підкладаємо st-токени під старі clr-змінні ======
+     Це дає стиль як на скріні, але НЕ ламає існуючу верстку/JS,
+     бо всюди в CSS далі можуть лишатись --clr-* */
+  --clr-bg-body:      var(--st-ink-0, #020617);
+  --clr-text-main:    var(--st-text-main, #e5e7eb);
+  --clr-text-soft:    var(--st-text-soft, #b6c2d1);
+  --clr-text-mute:    var(--st-text-mute, #8a98ac);
+  --clr-accent:       var(--st-accent, #38bdf8);
+  --clr-accent-soft:  var(--st-accent-soft, rgba(56,189,248,0.14));
+  --clr-accent-line:  var(--st-accent-line, rgba(56,189,248,0.65));
+
+  --builder-radius-lg: 20px;
+  --builder-radius-md: 16px;
+  --builder-radius-sm: 12px;
+
+  --builder-border-subtle: 1px solid rgba(148, 163, 184, 0.4);
+  --builder-shadow-soft:
+    0 18px 45px rgba(15, 23, 42, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+
+  --builder-shadow-floating:
+    0 18px 50px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(30, 64, 175, 0.75);
+
+  --builder-sidebar-expanded-w: 210px;
+  --builder-sidebar-collapsed-w: 60px;
+
+  --builder-settings-min-w: 260px;
+  --builder-settings-max-w: 420px;
+  --builder-settings-w: 320px;
+
+  --builder-transition-fast: 140ms ease-out;
+  --builder-transition-med: 180ms ease-out;
+
+  --builder-header-h: 54px;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--clr-text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Градієнтний фон конструктора */
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(59,130,246,0.2), transparent 55%),
+    linear-gradient(145deg, #020617 0%, #020617 35%, #020617 70%, #020617 100%);
+}
+
+/* ========== ГОЛОВНА ШАПКА САЙТБУДЕРА ========== */
+
+.builder__header {
+  height: var(--builder-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  backdrop-filter: blur(20px);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 65%),
+    radial-gradient(circle at bottom right, rgba(59,130,246,0.22), transparent 60%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  position: relative;
+  z-index: 20;
+}
+
+/* Лівий блок шапки */
+.builder__header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Лого */
+.builder__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.builder__logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.45), transparent 65%),
+    radial-gradient(circle at bottom right, rgba(125,211,252,0.45), transparent 65%),
+    linear-gradient(135deg, #0f172a, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.6),
+    0 10px 25px rgba(15, 23, 42, 0.9);
+  font-size: 16px;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+.builder__logo-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #e5e7eb;
+}
+
+/* Центр шапки */
+.builder__header-center {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Поточний сайт */
+.builder__current-site {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  font-size: 12px;
+}
+
+.builder__current-site-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-text-mute);
+}
+
+.builder__current-site-name {
+  font-weight: 500;
+}
+
+/* Кнопка створити сторінку / сайт */
+.builder__primary-cta {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.4), transparent 60%),
+    linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: #0b1120;
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.builder__primary-cta span {
+  font-weight: 600;
+}
+
+/* Правий блок шапки */
+.builder__header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Перемикачі Теми / Вигляду / Сайта */
+.builder__header-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  font-size: 12px;
+  color: var(--clr-text-soft);
+}
+
+.builder__header-field select {
+  border: none;
+  background: transparent;
+  color: var(--clr-text-main);
+  font-size: 12px;
+  padding: 0;
+  outline: none;
+}
+
+.builder__header-field option {
+  background: #020617;
+}
+
+/* Кнопка "Попередній перегляд" */
+.builder__preview-btn {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at 0 0, rgba(56,189,248,0.4), transparent 60%),
+    linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: #0b1120;
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.builder__preview-btn span {
+  font-weight: 600;
+}
+
+.builder__header-pin {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.95);
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text-soft);
+  cursor: pointer;
+}
+
+/* Прихована шапка */
+.builder--header-hidden .builder__header {
+  display: none;
+}
+
+/* ========== ГОЛОВНИЙ МАКЕТ (sidebar + canvas + settings) ========== */
+
+.builder__main {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  padding: 10px 12px 12px;
+  gap: 10px;
+}
+
+/* Порядок елементів при лівому/правому сайдбарі (flex-order) */
+.builder--side-left .builder__sidebar { order: 1; }
+.builder--side-left #builder-settings-sidebar { order: 2; }
+.builder--side-left #builder-settings-resizer { order: 3; }
+.builder--side-left .builder__canvas { order: 4; }
+
+.builder--side-right .builder__canvas { order: 1; }
+.builder--side-right #builder-settings-resizer { order: 2; }
+.builder--side-right #builder-settings-sidebar { order: 3; }
+.builder--side-right .builder__sidebar { order: 4; }
+
+/* --- MAIN SIDEBAR --- */
+.builder__sidebar {
+  flex: 0 0 auto;
+  width: var(--builder-sidebar-expanded-w);
+  border-radius: var(--builder-radius-lg);
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
+  border: var(--builder-border-subtle);
+  box-shadow: var(--builder-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width var(--builder-transition-med);
+}
+
+.builder--sidebar-collapsed .builder__sidebar {
+  width: var(--builder-sidebar-collapsed-w);
+}
+
+.builder__sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Верхній control */
+.builder__sidebar-collapse {
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid rgba(30, 64, 175, 0.4);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 70%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+  color: var(--clr-text-main);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Меню в сайдбарі */
+.builder__sidebar-menu {
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.builder__sidebar-group-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-text-mute);
+  margin: 4px 8px 6px;
+}
+
+/* Всі айтеми, включно зі вкладками налаштувань та primary-кнопкою
+   у табличному вигляді (табличний режим вигляду) */
+.builder__sidebar-item,
+.builder.builder--view-table .builder__settings-tab,
+.builder.builder--view-table .builder__primary-btn {
+  border-radius: 0 !important;
+}
+
+/* Стандартний айтем меню */
+.builder__sidebar-item {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 7px 9px;
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--clr-text-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+  transition:
+    background var(--builder-transition-fast),
+    color var(--builder-transition-fast),
+    transform var(--builder-transition-fast);
+}
+
+.builder__sidebar-item:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--clr-text-main);
+  transform: translateY(-0.5px);
+}
+
+.builder__sidebar-item.is-active {
+  background: var(--clr-accent-soft);
+  color: var(--clr-accent);
+}
+
+.builder__sidebar-icon {
+  font-size: 15px;
+  flex: 0 0 auto;
+}
+
+.builder--sidebar-collapsed .builder__sidebar-label {
+  display: none;
+}
+
+/* --- SETTINGS SIDEBAR --- */
+
+.builder__settings {
+  flex: 0 0 auto;
+  width: var(--builder-settings-w);
+  min-width: var(--builder-settings-min-w);
+  max-width: var(--builder-settings-max-w);
+  border-radius: var(--builder-radius-lg);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.15), transparent 70%),
+    radial-gradient(circle at bottom right, rgba(37,99,235,0.18), transparent 70%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.99));
+  border: var(--builder-border-subtle);
+  box-shadow: var(--builder-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.builder__settings-header {
+  padding: 8px 10px 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.builder__settings-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--clr-text-main);
+}
+
+.builder__settings-close {
+  border: none;
+  background: transparent;
+  color: var(--clr-text-mute);
+  cursor: pointer;
+}
+
+.builder__settings-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 2px;
+  flex-wrap: wrap;
+}
+
+.builder__settings-tab {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.96);
+  color: var(--clr-text-soft);
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.builder__settings-tab.is-active {
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--clr-accent);
+}
+
+.builder__settings-panels {
+  padding: 6px 8px 10px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Панель */
+.builder__settings-panel {
+  display: none;
+}
+
+.builder__settings-panel.is-active {
+  display: block;
+}
+
+/* Поля в панелі */
+.builder__field {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.builder__field-label {
+  font-size: 11px;
+  color: var(--clr-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.builder__field input[type="text"],
+.builder__field select,
+.builder__field input[type="range"] {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--clr-text-main);
+  padding: 6px 10px;
+  font-size: 12px;
+  outline: none;
+}
+
+.builder__field input[type="text"]::placeholder {
+  color: var(--clr-text-mute);
+}
+
+.builder__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--clr-text-soft);
+}
+
+.builder__primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: none;
+  background:
+    radial-gradient(circle at 0 0, rgba(56,189,248,0.4), transparent 70%),
+    var(--clr-accent);
+  color: #020617;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 12px 32px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* --- CANVAS (робоче полотно) --- */
+.builder__canvas {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: var(--builder-radius-lg);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 60%),
+    linear-gradient(135deg, #020617, #020617);
+  border: var(--builder-border-subtle);
+  box-shadow: var(--builder-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.canvas__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Шапка полотна */
+.canvas__header {
+  padding: 8px 10px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.95);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 70%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+}
+
+/* Кнопки в шапці полотна */
+.canvas__controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.canvas__btn {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--clr-text-soft);
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Прокрутка полотна */
+.canvas__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* --- FOOTER --- */
+
+.builder__footer {
+  flex: 0 0 auto;
+  padding: 4px 14px 10px;
+  font-size: 11px;
+  color: var(--clr-text-mute);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===== PREVIEW MODE ===== */
+/* У preview ми просто ховаємо UI конструктора, НЕ чіпаючи стилі сайта */
+.builder.builder--preview .builder__sidebar,
+.builder.builder--preview .builder__settings,
+.builder.builder--preview .builder__settings-resizer,
+.builder.builder--preview .builder__footer {
+  display: none !important;
+}
+.builder.builder--preview .builder__main {
+  padding: 0;
+  gap: 0;
+}
+.builder.builder--preview .builder__canvas {
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}

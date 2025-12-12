@@ -1,0 +1,124 @@
+.design-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Окремий блок-секція в панелі дизайну */
+.design-section {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+/* Заголовок секції (кнопка-акордеон) */
+.design-section__header {
+  width: 100%;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  color: inherit;
+}
+
+.design-section__header:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.design-section__header-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.design-section__chevron {
+  transition: transform 0.15s ease;
+}
+
+.design-section.is-open .design-section__chevron {
+  transform: rotate(90deg);
+}
+
+/* Тіло секції */
+.design-section__body {
+  display: none;
+  padding: 8px 10px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.design-section.is-open .design-section__body {
+  display: block;
+}
+
+/* Прості контролы */
+.design-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.design-field__label {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.design-field__row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.design-pill-group {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.design-pill {
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.design-pill.is-active {
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 1;
+}
+
+.design-slider {
+  width: 100%;
+}
+
+.design-number {
+  width: 58px;
+  padding: 3px 6px;
+  font-size: 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  color: inherit;
+}
+
+/* 4-поля для відступів */
+.design-quad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+/* Вимкнена рамка для блоків/секцій */
+.st-border-off {
+  border: none !important;
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShiftTime — Віджет "Сторінки"</title>
+
+  <!-- Стилі тільки для цього віджета -->
+  <link rel="stylesheet" href="css/page-manager.css" />
+</head>
+<body class="pm-body">
+  <div id="pageWidgetRoot" class="pm-root">
+    <div class="pm-shell">
+      <!-- ДОДАТКОВИЙ САЙТБАР (ПРОТОТИП) -->
+      <aside class="pm-side" id="pmSidePanel">
+        <!-- Шапка сайтбару -->
+        <header class="pm-side__header">
+          <div class="pm-side__title-wrap">
+            <p class="pm-side__eyebrow">Налаштування</p>
+            <h2 class="pm-side__title">Віджет «Сторінки»</h2>
+          </div>
+          <p class="pm-side__hint">
+            Тут будуть глобальні налаштування сторінок, які потім перенесемо
+            у головний додатковий сайтбар конструктора.
+          </p>
+        </header>
+
+        <div class="pm-side__sections">
+          <!-- СЕКЦІЯ: Режим перегляду -->
+          <section class="pm-side__section">
+            <h3 class="pm-side__section-title">Режим перегляду</h3>
+            <p class="pm-side__section-subtitle">
+              Обери, які сторінки показувати та як їх сортувати.
+            </p>
+
+            <div class="pm-side__group">
+              <div class="pm-field">
+                <div class="pm-field__label">Фільтр статусу</div>
+                <div class="pm-pill-group" data-role="pmFilterStatus">
+                  <button type="button" class="pm-pill pm-pill--active" data-filter="all">
+                    Усі
+                  </button>
+                  <button type="button" class="pm-pill" data-filter="published">
+                    Опубліковані
+                  </button>
+                  <button type="button" class="pm-pill" data-filter="draft">
+                    Чернетки
+                  </button>
+                  <button type="button" class="pm-pill" data-filter="private">
+                    Тільки за посиланням
+                  </button>
+                </div>
+              </div>
+
+              <div class="pm-field">
+                <div class="pm-field__label">Сортування</div>
+                <select class="pm-select" id="pmSortSelect">
+                  <option value="order">За порядком у списку</option>
+                  <option value="name">За назвою (A–Я)</option>
+                  <option value="status">За статусом</option>
+                  <option value="path">За URL (slug)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pm-side__switch-row">
+              <label class="pm-switch">
+                <input type="checkbox" id="pmShowSlugSwitch" checked />
+                <div>
+                  <div class="pm-switch__label">Показувати URL (slug)</div>
+                  <div class="pm-switch__hint">
+                    Якщо вимкнути — у списку сторінок буде тільки назва без шляху.
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="pm-side__switch-row">
+              <label class="pm-switch">
+                <input type="checkbox" id="pmHighlightHomeSwitch" checked />
+                <div>
+                  <div class="pm-switch__label">Виділяти домашню сторінку</div>
+                  <div class="pm-switch__hint">
+                    Підсвічувати сторінку, яка позначена як «Домашня».
+                  </div>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- СЕКЦІЯ: Стандартні блоки сторінки -->
+          <section class="pm-side__section">
+            <h3 class="pm-side__section-title">Стандартні блоки сторінки</h3>
+            <p class="pm-side__section-subtitle">
+              За замовчуванням для нових сторінок. Можна перевизначити у самій сторінці.
+            </p>
+
+            <div class="pm-side__group pm-side__group--stack">
+              <div class="pm-field">
+                <div class="pm-field__label">Шапка (Header)</div>
+                <select class="pm-select" id="pmDefaultHeader">
+                  <option value="default">Стандартна шапка сайту</option>
+                  <option value="custom">Дозволити власну для сторінки</option>
+                  <option value="none">Без шапки за замовчуванням</option>
+                </select>
+              </div>
+
+              <div class="pm-field">
+                <div class="pm-field__label">Футер (Footer)</div>
+                <select class="pm-select" id="pmDefaultFooter">
+                  <option value="default">Стандартний футер сайту</option>
+                  <option value="custom">Дозволити власний для сторінки</option>
+                  <option value="none">Без футера за замовчуванням</option>
+                </select>
+              </div>
+
+              <div class="pm-field">
+                <div class="pm-field__label">Сайдбар</div>
+                <select class="pm-select" id="pmDefaultSidebar">
+                  <option value="default">Стандартний сайдбар</option>
+                  <option value="custom">Окремий для сторінки</option>
+                  <option value="none">Без сайдбара</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pm-side__switch-row">
+              <label class="pm-switch">
+                <input type="checkbox" id="pmInheritLayoutSwitch" checked />
+                <div>
+                  <div class="pm-switch__label">Наслідувати макет від сайту</div>
+                  <div class="pm-switch__hint">
+                    Нові сторінки використовують базовий шаблон макета (відступи, сітка, брейкпоінти).
+                  </div>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- СЕКЦІЯ: Шаблони сторінок -->
+          <section class="pm-side__section">
+            <h3 class="pm-side__section-title">Шаблони сторінок</h3>
+            <p class="pm-side__section-subtitle">
+              Швидкий старт: створити нову сторінку на основі готової структури.
+            </p>
+
+            <div class="pm-pill-group pm-pill-group--wrap">
+              <button type="button" class="pm-pill" data-template="landing">
+                Лендінг
+              </button>
+              <button type="button" class="pm-pill" data-template="services">
+                Послуги
+              </button>
+              <button type="button" class="pm-pill" data-template="contacts">
+                Контакти
+              </button>
+              <button type="button" class="pm-pill" data-template="blog">
+                Блог / Статті
+              </button>
+              <button type="button" class="pm-pill" data-template="blank">
+                Порожня сторінка
+              </button>
+            </div>
+
+            <button type="button" class="pm-btn pm-btn--ghost" id="pmTemplateCreateBtn">
+              Створити сторінку з шаблону
+            </button>
+          </section>
+
+          <!-- СЕКЦІЯ: Публікація та SEO -->
+          <section class="pm-side__section">
+            <h3 class="pm-side__section-title">Публікація &amp; SEO</h3>
+            <p class="pm-side__section-subtitle">
+              Базові налаштування для публікації усіх сторінок сайту.
+            </p>
+
+            <div class="pm-side__group pm-side__group--stack">
+              <div class="pm-field">
+                <div class="pm-field__label">Базовий домен сайту</div>
+                <div class="pm-field__description">
+                  Використовується для формування повних URL (публікація на Netlify / кастомний домен).
+                </div>
+                <input
+                  class="pm-input"
+                  type="text"
+                  id="pmBaseDomain"
+                  placeholder="https://my-site.netlify.app"
+                />
+              </div>
+
+              <div class="pm-field">
+                <div class="pm-field__label">Префікс для сторінок</div>
+                <div class="pm-field__description">
+                  Наприклад: <code>/app</code>, <code>/store</code> або порожньо, щоб публікувати з кореня.
+                </div>
+                <input class="pm-input" type="text" id="pmBasePrefix" placeholder="/" />
+              </div>
+            </div>
+
+            <div class="pm-side__switch-row">
+              <label class="pm-switch">
+                <input type="checkbox" id="pmAutoNoindexDrafts" checked />
+                <div>
+                  <div class="pm-switch__label">Автоматично ставити noindex для чернеток</div>
+                  <div class="pm-switch__hint">
+                    Усі сторінки зі статусом «Чернетка» будуть позначені як <code>noindex</code>.
+                  </div>
+                </div>
+              </label>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <!-- ГОЛОВНИЙ БЛОК ВІДЖЕТА СТОРІНОК -->
+      <main class="pm-main">
+        <section class="pm-panel" id="pagePanel">
+          <!-- ШАПКА ВІДЖЕТА -->
+          <header class="pm-panel__header">
+            <div class="pm-panel__title-block">
+              <p class="pm-panel__eyebrow">Віджет</p>
+              <h1 class="pm-panel__title">Сторінки сайту</h1>
+              <p class="pm-panel__subtitle">
+                Керуй сторінками поточного сайту: порядок, статус, дизайн та SEO-налаштування.
+              </p>
+            </div>
+
+            <div class="pm-panel__site-block">
+              <div class="pm-panel__site-label-row">
+                <span class="pm-panel__site-label">Сайт:</span>
+                <span class="pm-panel__site-name" id="pmSiteName">—</span>
+              </div>
+              <button class="pm-btn pm-btn--primary" id="pmCreatePageBtn" type="button">
+                + Створити сторінку
+              </button>
+            </div>
+          </header>
+
+          <!-- ОСНОВНИЙ КОНТЕНТ -->
+          <div class="pm-panel__body">
+            <!-- Порожній стан -->
+            <div class="pm-empty" id="pmEmptyState" hidden>
+              <h2 class="pm-empty__title">Немає вибраного сайту</h2>
+              <p class="pm-empty__text">
+                Спочатку створіть або виберіть сайт у віджеті <strong>«Сайт»</strong>.
+                Після цього тут зʼявиться список сторінок для цього сайту.
+              </p>
+            </div>
+
+            <!-- Список сторінок -->
+            <div class="pm-pages-list" id="pmPageList">
+              <!-- JS намалює картки сторінок -->
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Логіка віджета "Сторінки" -->
+  <script src="js/page-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* js/design/widgets/fill/css/design-fill.css */
+/* Віджет "Заливка" для панелі "Дизайн" */
+
+.design-fill-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.design-fill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.design-fill-row .design-input {
+  flex: 1 1 auto;
+}
+
+.design-fill-label {
+  min-width: 82px;
+  font-size: 11px;
+  color: #c4d3ff;
+}
+
+.design-fill-extra {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.design-fill-extra-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.design-fill-extra-label {
+  font-size: 11px;
+  color: #c4d3ff;
+}
+
+.design-fill-extra-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.design-fill-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.design-fill-apply-row {
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.design-fill-target {
+  font-size: 11px;
+  color: #8b9ad8;
+}
+
+/* Кнопка "Застосувати" в стилі пігулки */
+.design-button {
+  border: none;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #0b1220;
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.8), 0 8px 18px rgba(0,0,0,0.45);
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.design-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.55);
+}
+
+.design-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+}

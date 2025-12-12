@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShiftTime — Віджет "Сайт"</title>
+
+  <!-- Стилі тільки для цього віджета -->
+  <link rel="stylesheet" href="css/site-manager.css" />
+</head>
+<body class="sm-body">
+  <div id="siteWidgetRoot" class="sm-root">
+    <!-- Лівий сайтбар віджета "Сайт" -->
+    <aside class="sm-sidebar">
+      <div class="sm-sidebar__header">
+        <div class="sm-sidebar__badge">ВІДЖЕТ</div>
+        <h1 class="sm-sidebar__title">Сайт</h1>
+        <p class="sm-sidebar__subtitle">
+          Керування сайтами: створення, вибір і збереження даних для публікації на Netlify.
+        </p>
+      </div>
+
+      <div class="sm-sidebar__section">
+        <button class="sm-btn sm-btn--primary" id="smCreateBtn">
+          + Створити сайт
+        </button>
+        <button class="sm-btn sm-btn--ghost" id="smOpenBtn">
+          Відкрити сайт
+        </button>
+      </div>
+
+      <div class="sm-sidebar__section">
+        <div class="sm-sidebar__section-title">Список сайтів</div>
+        <ul class="sm-site-list" id="smSiteList">
+          <!-- JS намалює елементи тут -->
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Головний блок налаштувань сайту -->
+    <main class="sm-main">
+      <!-- Панель керування сайтом -->
+      <div class="site-panel" id="sitePanel">
+        <div class="site-panel__header">
+          <div>
+            <h2 class="site-panel__title">Налаштування сайту</h2>
+            <p class="site-panel__subtitle">
+              Заповни назву, slug та дані для Netlify. Ці параметри будуть використовуватись
+              при публікації сайту.
+            </p>
+          </div>
+          <button class="site-panel__save-btn" id="siteSaveBtn">
+            Зберегти
+          </button>
+        </div>
+
+        <div class="site-panel__body">
+          <!-- Основна інформація -->
+          <section class="site-card">
+            <h3 class="site-card__title">Основна інформація</h3>
+
+            <label class="site-field">
+              <span class="site-field__label">Назва сайту</span>
+              <input
+                type="text"
+                id="siteName"
+                class="site-field__input"
+                placeholder="Наприклад, ShiftTime Store"
+              />
+            </label>
+
+            <label class="site-field">
+              <span class="site-field__label">Slug / Код сайту</span>
+              <input
+                type="text"
+                id="siteSlug"
+                class="site-field__input"
+                placeholder="shifttime-store"
+              />
+              <small class="site-field__hint">
+                Лише латинські літери, цифри та дефіси. Використовується як код / папка сайту.
+              </small>
+            </label>
+
+
+
+                            <!-- ВИБІР ШАБЛОНУ САЙТУ -->
+                <div class="site-field">
+                <span class="site-field__label">Шаблон сайту</span>
+                <select
+                    id="siteTemplateSelect"
+                    class="site-field__input site-field__select"
+                >
+                    <!-- JS наповнить список -->
+                </select>
+                <small class="site-field__hint" id="siteTemplateInfo">
+                    Обери базовий шаблон (шапка, сайтбар, футер, основний блок). Пізніше
+                    конструктор сторінок буде будувати структуру сайту за цим шаблоном.
+                </small>
+                </div>
+
+
+            <label class="site-field">
+              <span class="site-field__label">Короткий опис</span>
+              <textarea
+                id="siteDescription"
+                class="site-field__textarea"
+                rows="3"
+                placeholder="Короткий опис сайту для SEO та списку сайтів"
+              ></textarea>
+            </label>
+          </section>
+
+          <!-- Netlify -->
+          <section class="site-card">
+            <h3 class="site-card__title">Публікація на Netlify</h3>
+
+            <label class="site-field">
+              <span class="site-field__label">Netlify Site Name</span>
+              <input
+                type="text"
+                id="netlifySiteName"
+                class="site-field__input"
+                placeholder="shifttime-store"
+              />
+            </label>
+
+            <label class="site-field">
+              <span class="site-field__label">Netlify URL</span>
+              <input
+                type="text"
+                id="netlifyUrl"
+                class="site-field__input"
+                placeholder="https://shifttime-store.netlify.app"
+              />
+            </label>
+
+            <label class="site-field">
+              <span class="site-field__label">Папка публікації (publish directory)</span>
+              <input
+                type="text"
+                id="netlifyPublishDir"
+                class="site-field__input"
+                placeholder="frontend"
+              />
+              <small class="site-field__hint">
+                Яку папку ти завантажуєш на Netlify. Зараз це вміст папки <code>frontend</code>.
+              </small>
+            </label>
+
+            <label class="site-field">
+              <span class="site-field__label">Deploy Hook URL (на майбутнє)</span>
+              <input
+                type="text"
+                id="netlifyDeployHook"
+                class="site-field__input"
+                placeholder="https://api.netlify.com/build_hooks/..."
+              />
+              <small class="site-field__hint">
+                Можна залишити порожнім. Пізніше використаємо для автодеплою.
+              </small>
+            </label>
+          </section>
+
+          <!-- Службова інформація -->
+          <section class="site-card">
+            <h3 class="site-card__title">Службова інформація</h3>
+
+            <div class="site-meta">
+              <div class="site-meta__item">
+                <span class="site-meta__label">ID сайту</span>
+                <span class="site-meta__value" id="siteIdView">—</span>
+              </div>
+              <div class="site-meta__item">
+                <span class="site-meta__label">Створено</span>
+                <span class="site-meta__value" id="siteCreatedAtView">—</span>
+              </div>
+              <div class="site-meta__item">
+                <span class="site-meta__label">Оновлено</span>
+                <span class="site-meta__value" id="siteUpdatedAtView">—</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Сторінки сайту (MVP) -->
+          <section class="site-card">
+            <h3 class="site-card__title">Сторінки сайту (MVP)</h3>
+
+            <p class="site-field__hint" style="margin-bottom: 8px;">
+              Для кожного сайту можна мати кілька сторінок. Пізніше саме тут будемо
+              відкривати сторінку в головному конструкторі.
+            </p>
+
+            <button
+              class="sm-btn sm-btn--ghost site-pages__add-btn"
+              id="siteAddPageBtn"
+              type="button"
+            >
+              + Додати сторінку
+            </button>
+
+            <ul class="site-pages__list" id="sitePagesList">
+              <!-- Список сторінок малює JS -->
+            </ul>
+
+            <!-- DEBUG-панель поточного вибору -->
+            <div class="site-debug" id="siteDebug">
+              <div class="site-debug__label">Поточний сайт / сторінка:</div>
+              <div class="site-debug__value">—</div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+    <!-- Логіка тільки для цього віджета -->
+  <script src="js/site-templates.js"></script>
+  <script src="js/site-manager.js"></script>
+</body>
+</html>

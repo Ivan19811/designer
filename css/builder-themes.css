@@ -1,0 +1,485 @@
+/* css/builder-themes.css */
+/* Теми конструктора. Усе зав'язане на CSS-змінних. */
+
+:root {
+  --builder-header-h: 56px;
+  --builder-sidebar-expanded-w: 240px;
+  --builder-sidebar-collapsed-w: 72px;
+  --builder-settings-min-w: 260px;
+  --builder-settings-max-w: 520px;
+  --builder-settings-w: 340px;
+
+  --builder-radius-md: 12px;
+  --builder-radius-lg: 18px;
+  --builder-shadow-soft: 0 14px 40px rgba(15, 23, 42, 0.35);
+  --builder-border-subtle: 1px solid rgba(148, 163, 184, 0.35);
+
+  --builder-transition-fast: 0.15s ease-out;
+  --builder-transition-med: 0.24s ease;
+}
+
+/* БАЗОВІ ТОКЕНИ (світла тема за замовчуванням) */
+.builder {
+  --clr-bg-body: #0f172a;
+  --clr-bg-surface: #020617;
+  --clr-bg-elevated: #020617;
+  --clr-bg-subtle: #020617;
+
+  --clr-border-subtle: rgba(148, 163, 184, 0.4);
+  --clr-text-main: #e5e7eb;
+  --clr-text-soft: #9ca3af;
+  --clr-text-mute: #6b7280;
+
+  --clr-accent: #38bdf8;
+  --clr-accent-soft: rgba(56, 189, 248, 0.12);
+
+  --clr-danger: #f97373;
+}
+
+/* СВІТЛА ТЕМА */
+.builder.builder--theme-light {
+  --clr-bg-body: #e5e7eb;
+  --clr-bg-surface: #f9fafb;
+  --clr-bg-elevated: #ffffff;
+  --clr-bg-subtle: #f3f4f6;
+
+  --clr-border-subtle: rgba(148, 163, 184, 0.45);
+  --clr-text-main: #0f172a;
+  --clr-text-soft: #4b5563;
+  --clr-text-mute: #6b7280;
+
+  --clr-accent: #2563eb;
+  --clr-accent-soft: rgba(37, 99, 235, 0.12);
+}
+
+/* ТЕМНА ТЕМА */
+.builder.builder--theme-dark {
+  --clr-bg-body: #020617;
+  --clr-bg-surface: #020617;
+  --clr-bg-elevated: #020617;
+  --clr-bg-subtle: #020617;
+
+  --clr-border-subtle: rgba(30, 64, 175, 0.45);
+  --clr-text-main: #e5e7eb;
+  --clr-text-soft: #9ca3af;
+  --clr-text-mute: #6b7280;
+
+  --clr-accent: #38bdf8;
+  --clr-accent-soft: rgba(56, 189, 248, 0.16);
+}
+
+/* КОРИСТУВАЦЬКА ТЕМА (стартово = мікс, далі будемо міняти через UI) */
+.builder.builder--theme-custom {
+  --clr-bg-body: #020617;
+  --clr-bg-surface: #020617;
+  --clr-bg-elevated: #020617;
+  --clr-bg-subtle: #020617;
+
+  --clr-border-subtle: rgba(148, 163, 184, 0.4);
+  --clr-text-main: #e5e7eb;
+  --clr-text-soft: #9ca3af;
+  --clr-text-mute: #9ca3af;
+
+  --clr-accent: #f97316;
+  --clr-accent-soft: rgba(249, 115, 22, 0.16);
+}
+/* ==== ShiftTime Builder Visual Tokens (style like your screenshot) ==== */
+:root {
+  /* BASE BLUES / GRAPHITE */
+  --st-ink-0: #020617;   /* body bg */
+  --st-ink-1: #0b1220;   /* panels */
+  --st-ink-2: #0f172a;   /* deeper panels */
+  --st-ink-3: #121a2f;   /* hover */
+  --st-ink-4: #17233d;   /* active */
+
+  /* TEXT */
+  --st-text-main: #e5e7eb;
+  --st-text-soft: #b6c2d1;
+  --st-text-mute: #8a98ac;
+
+  /* ACCENT (cyan/blue glow like screenshot) */
+  --st-accent: #38bdf8;
+  --st-accent-2: #1d4ed8;
+  --st-accent-soft: rgba(56,189,248,0.14);
+  --st-accent-line: rgba(56,189,248,0.65);
+
+  /* BORDERS */
+  --st-border: 1px solid rgba(148,163,184,0.35);
+  --st-border-strong: 1px solid rgba(148,163,184,0.55);
+
+  /* RADIUS */
+  --st-radius-sm: 10px;
+  --st-radius-md: 14px;
+  --st-radius-lg: 18px;
+  --st-radius-pill: 999px;
+
+  /* SHADOWS / GLOW */
+  --st-shadow-soft: 0 8px 24px rgba(2,6,23,0.8);
+  --st-glow-corner:
+    radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(56,189,248,0.12), transparent 55%);
+}
+
+
+/* RADIUS ------------------------------------------------------------КВАДРАТ РАДІУСА*/
+
+.design-radius-corners-grid {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.design-radius-row {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start;
+}
+
+.design-radius-row .design-pill {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+/* Контейнер з кнопками стилів --------------------Ліній---------------------------------------------------------*/
+.border-style-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Кнопка стилю — по всій ширині */
+.border-style-btn {
+  width: 100%;
+  padding: 4px 0;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Активна кнопка */
+.border-style-btn.is-active {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+/* Внутрішній прев’ю-еліментик */
+.border-style-preview {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border-bottom-width: 0;
+}
+
+
+/* БАЗОВІ CSS-СТИЛІ ЛІНІЙ============================================================================================*/
+
+/* Суцільна */
+.border-style-preview[data-style-preview="solid"] {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Штрихова */
+.border-style-preview[data-style-preview="dashed"] {
+  border-bottom: 2px dashed #e5e7eb;
+}
+
+/* Крапки */
+.border-style-preview[data-style-preview="dotted"] {
+  border-bottom: 3px dotted #e5e7eb;
+}
+
+/* Подвійна */
+.border-style-preview[data-style-preview="double"] {
+  border-bottom: 4px double #e5e7eb;
+}
+
+/* Втиснута */
+.border-style-preview[data-style-preview="groove"] {
+  border-bottom: 4px groove #e5e7eb;
+}
+
+/* Опукла */
+.border-style-preview[data-style-preview="ridge"] {
+  border-bottom: 4px ridge #e5e7eb;
+}
+
+/* Внутрішня */
+.border-style-preview[data-style-preview="inset"] {
+  border-bottom: 3px inset #e5e7eb;
+}
+
+/* Зовнішня */
+.border-style-preview[data-style-preview="outset"] {
+  border-bottom: 3px outset #e5e7eb;
+}
+
+
+/* Хвиляста — імітуємо хвилю */
+.border-style-preview[data-style-preview="wavy"] {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #e5e7eb 0,
+    #e5e7eb 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  height: 10px;
+}
+
+/* Штрих + крапка */
+.border-style-preview[data-style-preview="dashdot"] {
+  background-image: linear-gradient(to right,
+    #e5e7eb 0 10%,
+    transparent 10% 20%,
+    #e5e7eb 20% 22%,
+    transparent 22% 32%
+  );
+  background-size: 32px 2px;
+  background-repeat: repeat-x;
+  height: 6px;
+}
+
+/* Великі крапки */
+.border-style-preview[data-style-preview="big-dots"] {
+  background-image: radial-gradient(circle, #e5e7eb 50%, transparent 52%);
+  background-size: 10px 10px;
+  background-repeat: repeat-x;
+  height: 8px;
+}
+
+/* Зірочки — поки умовно, з Unicode-символом */
+.border-style-preview[data-style-preview="star-line"] {
+  position: relative;
+  height: 14px;
+}
+.border-style-preview[data-style-preview="star-line"]::before {
+  content: "★ ★ ★ ★ ★";
+  position: absolute;
+  inset: 0;
+  font-size: 10px;
+  line-height: 14px;
+  color: #e5e7eb;
+  letter-spacing: 4px;
+}
+/* ==== End of ShiftTime Builder Visual Tokens ==== */
+
+/* БАЗА для всіх декоративних бордерів */
+.st-border-wavy,
+.st-border-dashdot,
+.st-border-big-dots,
+.st-border-star-line {
+  border-style: solid;
+  border-color: #e5e7eb;           /* поки що постійний колір, далі прив'яжемо до віджета кольору */
+  border-width: 3px;               /* дружить з "Середня" / "Товста" */
+  border-image-slice: 1;
+}
+
+/* ХВИЛЯСТА ЛІНІЯ */
+.st-border-wavy {
+  border-image-source: repeating-linear-gradient(
+    -45deg,
+    #e5e7eb 0,
+    #e5e7eb 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border-image-repeat: round;
+}
+
+/* ШТРИХ + КРАПКА */
+.st-border-dashdot {
+  border-image-source: repeating-linear-gradient(
+    to right,
+    #e5e7eb 0 12px,
+    transparent 12px 18px,
+    #e5e7eb 18px 20px,
+    transparent 20px 28px
+  );
+  border-image-repeat: round;
+}
+
+/* ВЕЛИКІ КРАПКИ */
+.st-border-big-dots {
+  border-image-source: radial-gradient(circle, #e5e7eb 55%, transparent 56%);
+  border-image-repeat: round;
+}
+
+
+
+
+/* КОНТРОЛ ДЛЯ ТОВЩИНИ РАМКИ ------------------------------Слайдер + інпут------------------------------------------*/
+
+.custom-thickness-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.custom-thickness-range {
+  flex: 1;
+  accent-color: #38bdf8;
+}
+
+.custom-thickness-input {
+  width: 70px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+[data-border-thickness-reset] {
+  margin-top: 6px;
+  width: 100%;
+  justify-content: center;
+}
+
+
+/* КОЛІР ЛІНІЙ / ГРАДІЄНТ ----------------віджет-----------------------------*/
+
+.color-solid-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-solid-row input[type="color"] {
+  width: 36px;
+  height: 28px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(148,163,184,0.45);
+  background: transparent;
+}
+
+.color-solid-row input[type="text"] {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(51,65,85,1);
+  background: #020617;
+  color: #e5e7eb;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/* Градієнт */
+
+.color-gradient-colors {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.color-gradient-color {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.color-gradient-color span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.color-gradient-color input[type="color"] {
+  width: 100%;
+  height: 28px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(148,163,184,0.45);
+  background: transparent;
+}
+
+.color-gradient-split {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.color-gradient-split-label {
+  font-size: 11px;
+  color: #9ca3af;
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-gradient-preview {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.45);
+  background: linear-gradient(90deg, #38bdf8 0%, #38bdf8 50%, #facc15 50%, #facc15 100%);
+}
+
+/* Прозорість + Ч/Б */
+
+.color-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-slider-label {
+  font-size: 11px;
+  color: #9ca3af;
+  width: 80px;
+}
+
+.color-slider-row input[type="range"] {
+  flex: 1;
+  accent-color: #38bdf8;
+}
+
+.color-slider-value {
+  width: 40px;
+  text-align: right;
+  font-size: 11px;
+  color: #e5e7eb;
+}
+
+
+.color-gradient-blend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.color-gradient-blend-label {
+  font-size: 11px;
+  color: #9ca3af;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* ЗІРОЧКИ ПО ПЕРИМЕТРУ (border-image з inline SVG) */
+.st-border-star-line {
+  border-image-source: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='40' height='10' viewBox='0 0 40 10'>\
+  <text x='0' y='8' font-size='8' fill='%23e5e7eb'>★</text>\
+  <text x='10' y='8' font-size='8' fill='%23e5e7eb'>★</text>\
+  <text x='20' y='8' font-size='8' fill='%23e5e7eb'>★</text>\
+  <text x='30' y='8' font-size='8' fill='%23e5e7eb'>★</text>\
+</svg>");
+  border-image-repeat: round;
+}
+

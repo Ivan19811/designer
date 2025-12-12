@@ -1,0 +1,440 @@
+/* css/site-canvas.css */
+/* СТИЛІ ТІЛЬКИ ДЛЯ САЙТА (всередині .site-root) */
+
+.site-root {
+  --site-gap: 16px;
+  --site-block-bg: #0f172a;
+  --site-block-brd: rgba(148,163,184,0.45);
+  --site-block-radius: 14px;
+
+  /* Підсвітка активного блока (яскрава блакить) */
+  --site-active-outline: rgba(56,189,248,0.95);
+
+  /* Підсвітка активної секції (бірюзовий, відрізняється по відтінку) */
+  --site-section-active-outline: rgba(94,234,212,0.95);
+
+  --site-drop-outline: rgba(129,140,248,0.95);
+  --site-insert-line: rgba(56,189,248,0.95);
+}
+
+.site-root .st-section {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.site-root .st-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--site-gap);
+  width: 100%;
+  max-width: 100%;
+  align-items: stretch;
+  position: relative;
+  min-height: 40px;
+}
+
+/* Підсвітка РЯДУ при можливій вставці */
+.site-root .st-row.is-drop-target {
+  outline: 1px dashed rgba(129,140,248,0.6);
+  outline-offset: 5px;
+  border-radius: 10px;
+}
+
+/* Блок */
+.site-root .st-block {
+  position: relative;
+  min-height: 140px;
+  background: var(--site-block-bg);
+  border: 1px solid var(--site-block-brd);
+  border-radius: var(--site-block-radius);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+
+  /* ✅ критично для grid щоб не вилазив */
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.site-root .st-block.is-active {
+  outline: 2px solid var(--site-active-outline);
+  outline-offset: -2px;
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+}
+
+.site-root .st-block.is-dragging { opacity: 0.55; }
+.site-root .st-block.is-drop-target {
+  outline: 2px dashed var(--site-drop-outline);
+  outline-offset: -4px;
+}
+
+/* Внутрішній ряд (для вкладених блоків) */
+.site-root .st-block > .st-row {
+  margin-top: 0;
+  padding: 10px;
+  background: transparent;
+  border-top: none;
+}
+
+/* ===== ЛІНІЯ ВСТАВКИ МІЖ БЛОКАМИ ===== */
+.site-root .st-insert-line {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--site-insert-line);
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(56,189,248,0.12);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transform: translateX(-1px);
+  transition: opacity 80ms linear;
+}
+.site-root .st-insert-line.is-visible { opacity: 1; }
+
+/* Лінія вставки між секціями (горизонтальна) */
+.site-root .st-sec-insert-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(94, 234, 212, 0.85); /* м'ятна лінія */
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-1px);
+  transition: opacity 0.12s ease;
+  z-index: 10;
+}
+
+.site-root .st-sec-insert-line.is-visible {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ===== RESIZE HANDLES ===== */
+.site-root .st-resize {
+  position: absolute;
+  background: transparent;
+  z-index: 6;
+}
+.site-root .st-resize--n { top:-4px; left:0; right:0; height:8px; cursor:ns-resize; }
+.site-root .st-resize--s { bottom:-4px; left:0; right:0; height:8px; cursor:ns-resize; }
+.site-root .st-resize--w { left:-4px; top:0; bottom:0; width:8px; cursor:ew-resize; }
+.site-root .st-resize--e { right:-4px; top:0; bottom:0; width:8px; cursor:ew-resize; }
+
+.site-root .st-resize--nw { left:-5px; top:-5px; width:12px; height:12px; cursor:nwse-resize; }
+.site-root .st-resize--ne { right:-5px; top:-5px; width:12px; height:12px; cursor:nesw-resize; }
+.site-root .st-resize--sw { left:-5px; bottom:-5px; width:12px; height:12px; cursor:nesw-resize; }
+.site-root .st-resize--se { right:-5px; bottom:-5px; width:12px; height:12px; cursor:nwse-resize; }
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .site-root .st-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .site-root .st-row { grid-template-columns: 1fr; }
+}
+
+
+/* --- Видимі секції (карточки навколо рядів) --- */
+
+/* --- Видимі секції (карточки навколо рядів) --- */
+
+.site-root .st-section {
+  margin-bottom: var(--site-gap);
+  padding: 16px;
+  border-radius: 18px;
+
+  /* фон секції трохи відрізняється від фону блоків, але в тій самій палітрі */
+  background: radial-gradient(circle at 0 0, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+
+  /* ✅ замість box-shadow використовуємо звичайний бордер як у блоків */
+  border: 1px solid var(--site-block-brd);
+}
+
+/* Легка підсвітка секції при наведенні (інший відтінок, ніж у блоку) */
+.site-root .st-section:hover:not(.is-active):not(.is-dragging) {
+  outline: 1px solid rgba(120, 153, 132, 0.7);   /* мʼякий зелений контур */
+  outline-offset: -2px;
+  box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.15); /* легке "свічення" */
+  background-color: rgba(22, 163, 74, 0.04);      /* дуже легкий зелений фон */
+}
+
+
+
+
+
+
+/* невеликий відступ між секціями */
+.site-root .st-section + .st-section {
+  margin-top: var(--site-gap);
+}
+
+/* активна секція — своя рамка, інший колір */
+.site-root .st-section.is-active {
+  box-shadow: 0 0 0 2px var(--site-section-active-outline);
+}
+
+
+/* === ВНУТРІШНІ СКРОЛИ ДЛЯ КОНСТРУКТОРА (ОСТАТОЧНИЙ OVERRIDE) === */
+
+/* Конструктор займає весь екран */
+#builder-root.builder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Верхня шапка та футер фіксовані по висоті */
+.builder__header,
+.builder__footer {
+  flex: 0 0 auto;
+}
+
+/* Центральна частина (сайдбар + правий сайтбар + канвас) */
+.builder__main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: auto auto 4px 1fr;
+  /* 1 — головний сайтбар, 2 — додатковий, 3 — ресайзер, 4 — канвас */
+}
+
+/* Головний сайтбар зліва */
+.builder__sidebar {
+  grid-column: 1;
+}
+
+/* Додатковий сайтбар справа */
+.builder__settings {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Ресайзер */
+#builder-settings-resizer {
+  grid-column: 3;
+}
+
+/* CANVAS (центральний блок) */
+.builder__canvas {
+  grid-column: 4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Шапка канвасу не скролиться */
+.canvas__header {
+  flex: 0 0 auto;
+}
+
+/* Прокручується тільки ця область */
+.canvas__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Щоб фон канвасу тягнувся на всю видиму висоту */
+.builder__canvas-site {
+  min-height: 100%;
+}
+
+/* --- ДОДАТКОВИЙ САЙТБАР: внутрішній скрол --- */
+
+.builder__settings-header,
+.builder__settings-tabs {
+  flex: 0 0 auto;
+}
+
+.builder__settings-panels {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* === Scrollbars керовані з віджета "Налаштування → Скролбар" === */
+
+/* --- ГОЛОВНИЙ БЛОК (canvas) --- */
+.canvas__scroll {
+  /* дефолтні значення, які потім перезапише JS через style.setProperty */
+  --scroll-main-width-normal: 8px;
+  --scroll-main-width-hover: 8px;
+  --scroll-main-thumb: #38bdf8;
+  --scroll-main-thumb-hover: #4fd1ff;
+  --scroll-main-track: #020617;
+  --scroll-main-radius: 999px;
+
+  scrollbar-color: var(--scroll-main-thumb) var(--scroll-main-track);
+  scrollbar-width: thin;
+}
+
+.canvas__scroll::-webkit-scrollbar {
+  width: var(--scroll-main-width-normal);
+  height: var(--scroll-main-width-normal);
+}
+
+.canvas__scroll:hover::-webkit-scrollbar {
+  width: var(--scroll-main-width-hover);
+  height: var(--scroll-main-width-hover);
+}
+
+.canvas__scroll::-webkit-scrollbar-track {
+  background: var(--scroll-main-track);
+}
+
+.canvas__scroll::-webkit-scrollbar-thumb {
+  background: var(--scroll-main-thumb);
+  border-radius: var(--scroll-main-radius);
+}
+
+.canvas__scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-main-thumb-hover);
+}
+
+/* --- ДОДАТКОВИЙ САЙТБАР (панелі праворуч) --- */
+.builder__settings-panels {
+  --scroll-side-width-normal: 8px;
+  --scroll-side-width-hover: 8px;
+  --scroll-side-thumb: #38bdf8;
+  --scroll-side-thumb-hover: #4fd1ff;
+  --scroll-side-track: #020617;
+  --scroll-side-radius: 999px;
+
+  scrollbar-color: var(--scroll-side-thumb) var(--scroll-side-track);
+  scrollbar-width: thin;
+}
+
+.builder__settings-panels::-webkit-scrollbar {
+  width: var(--scroll-side-width-normal);
+  height: var(--scroll-side-width-normal);
+}
+
+.builder__settings-panels:hover::-webkit-scrollbar {
+  width: var(--scroll-side-width-hover);
+  height: var(--scroll-side-width-hover);
+}
+
+.builder__settings-panels::-webkit-scrollbar-track {
+  background: var(--scroll-side-track);
+}
+
+.builder__settings-panels::-webkit-scrollbar-thumb {
+  background: var(--scroll-side-thumb);
+  border-radius: var(--scroll-side-radius);
+}
+
+.builder__settings-panels::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-side-thumb-hover);
+}
+
+/* При вимкненому бордері забираємо тільки саму рамку (border),
+   але не активну підсвітку */
+/* При вимкненому бордері забираємо тільки сам бордер (ширина + колір),
+   але не підсвітку активної секції чи блока */
+.st-block.st-border-off,
+.st-section.st-border-off {
+  border-width: 0 !important;
+  border-color: transparent !important;
+}
+
+
+
+
+/* Якщо секція активна — завжди показуємо м'ятну рамку
+   навіть якщо бордер вимкнений */
+.site-root .st-section.st-border-off.is-active {
+  box-shadow: 0 0 0 2px var(--site-section-active-outline) !important;
+}
+
+/* === ЛІНІЯ ЯК БЛОК =================================================== */
+
+/* === ЛІНІЯ ЯК БЛОК (оновлено) ======================================= */
+
+/* Базовий вигляд лінії */
+.st-block--line {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+
+  /* Головне: прибираємо “блоковість” */
+  min-height: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+
+  margin: 12px 0;
+
+  background: transparent !important;
+
+  /* Керовані змінні для товщини та довжини */
+  --st-line-thickness: 2px;
+  --st-line-length: 100%;
+
+  /* Малюємо лінію через border */
+  border-style: solid;
+  border-color: var(--site-block-brd, #38bdf8);
+  border-width: 0;
+  border-top-width: var(--st-line-thickness);
+
+  border-radius: 999px;
+}
+
+/* Орієнтація: горизонтальна (за замовчуванням) */
+.st-block--line[data-line-orientation="horizontal"],
+.st-block--line:not([data-line-orientation]) {
+  width: var(--st-line-length);
+  height: 0 !important;
+}
+
+/* Орієнтація: вертикальна */
+.st-block--line[data-line-orientation="vertical"] {
+  width: 0 !important;
+  height: var(--st-line-length);
+  border-top-width: 0;
+  border-left-width: var(--st-line-thickness);
+}
+
+/* Щоб інші сторони не перетворювали її знов на “рамку навколо блока” */
+.st-block--line {
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+.st-block--line[data-line-orientation="vertical"] {
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+}
+
+/* Ховер – щоб було видно, що це окремий елемент */
+.site-root:not(.st-no-hover-outline) .st-block--line:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35);
+}
+
+/* Легка підсвітка при наведенні — щоб було видно, що елемент "береться" мишкою */
+.site-root .st-block:hover:not(.is-active):not(.is-dragging) {
+  outline: 1px solid rgba(148,163,184,0.70); /* мʼякша, ніж активний стан */
+  outline-offset: -2px;
+}
+
+

@@ -1,0 +1,215 @@
+/* js/design/widgets/border-widget/css/border-widget.css */
+/* Віджет "Бордер" для панелі "Дизайн" */
+
+/* Рядок з чекбоксами "Вибрати блоки / секції" */
+.design-border-target-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Чіпи з чекбоксами */
+.design-border-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 0 1px rgba(30, 64, 175, 0.8);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.design-border-flag input {
+  margin: 0;
+}
+
+.design-border-flag span {
+  white-space: nowrap;
+}
+
+/* Підсумок вибраних груп */
+.design-border-target-summary {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Контейнер під-акордеонів (Рамка / Радіуси / Тіні / Підсвічування) */
+.design-border-subsections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Окремий під-акордеон */
+.design-border-subsection {
+  border-radius: 12px;
+  overflow: hidden;
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+  box-shadow:
+    0 0 0 1px rgba(30, 64, 175, 0.55),
+    0 10px 22px rgba(0, 0, 0, 0.65);
+}
+
+/* Заголовок під-акордеону — на всю ширину, як у інспекторі */
+.design-border-subheader {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: linear-gradient(90deg, rgba(21, 28, 48, 0.98), rgba(18, 65, 126, 0.75));
+  color: #f5f7ff;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.design-border-subsection.is-open .design-border-subheader {
+  background: linear-gradient(90deg, rgba(30, 98, 190, 0.95), rgba(37, 75, 150, 0.95));
+}
+
+.design-border-subheader:focus-visible {
+  outline: 2px solid #4da3ff;
+  outline-offset: 2px;
+}
+
+.design-border-subheader-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.design-border-subheader-chevron {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* Тіло під-акордеону */
+.design-border-subbody {
+  padding: 8px 10px 10px;
+  border-top: 1px solid rgba(65, 94, 178, 0.7);
+  background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+}
+
+/* Рядок всередині групи (на майбутнє для повзунків/інпутів) */
+.design-border-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.design-border-label {
+  width: 110px;
+  font-size: 11px;
+  color: #e5e7eb;
+}
+
+.design-border-unit {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Нижній рядок з кнопкою "Застосувати бордер" */
+.design-border-apply-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.design-border-apply-note {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Межі елементів (гіди) */
+.design-borders-guides-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.design-border-flag input[type="checkbox"] {
+  display: none;
+}
+
+.design-border-flag span {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.design-border-flag input[type="checkbox"]:checked + span {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  color: #e5edff;
+}
+
+/* Колір гідів — через змінні (далі налаштуємо окремою панеллю "Межі") */
+:root {
+  --st-guide-section: rgba(56, 189, 248, 0.9);
+  --st-guide-container: rgba(249, 115, 22, 0.9);
+  --st-guide-block: rgba(94, 234, 212, 0.9);
+}
+
+/* Секції */
+.builder--guides-sections #site-root .st-section {
+  outline: 1px dashed var(--st-guide-section);
+  outline-offset: -1px;
+}
+
+/* Блоки-контейнери (мають вкладені блоки) */
+.builder--guides-containers #site-root .st-block.st-block--guide-container {
+  outline: 1px dashed var(--st-guide-container);
+  outline-offset: -1px;
+}
+
+/* Звичайні блоки (без вкладених блоків) */
+.builder--guides-blocks #site-root .st-block.st-block--guide-leaf {
+  outline: 1px dashed var(--st-guide-block);
+  outline-offset: -1px;
+}
+
+/* Підвіджет "Рамка" — відключені секції (коли рамка вимкнена) */
+.design-field.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Активні пресети / сторони */
+.design-border-presets-row,
+.design-border-sides-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.design-pill {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  cursor: pointer;
+}
+
+.design-pill.is-active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  color: #e5edff;
+}
